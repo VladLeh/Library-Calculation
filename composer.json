@@ -2,7 +2,14 @@
   "name": "itlab-studio/calculation",
   "type": "library",
   "description": "Library for calculating the exchange rate for buying and selling currencies",
-  "keywords": ["exchanger", "calculation", "standards", "course", "payin", "payout"],
+  "keywords": [
+    "exchanger",
+    "calculation",
+    "standards",
+    "course",
+    "payin",
+    "payout"
+  ],
   "homepage": "https://itlab-studio.com/",
   "license": "MIT",
   "authors": [
@@ -13,24 +20,32 @@
   ],
   "repositories": [
     {
-      "type":"package",
+      "type": "package",
       "package": {
         "name": "itlab-studio/calculation",
-        "version":"master",
+        "version": "master",
         "source": {
           "url": "https://github.com/igor-itlab/Library-Calculation.git",
           "type": "git",
-          "reference":"master"
+          "reference": "master"
         }
       }
     }
   ],
   "require": {
     "php": ">=7.1.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "doctrine/collections": "^1.6"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*",
+    "symfony/browser-kit": "*",
+    "symfony/var-dumper": "^5.1"
   },
   "autoload": {
-    "psr-4": { "Calculation\\": "" }
+    "psr-4": {
+      "Calculation\\": ""
+    }
   },
   "extra": {
     "symfony": {
