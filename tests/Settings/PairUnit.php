@@ -10,6 +10,7 @@ use Calculation\Utils\Exchange\PairUnitInterface;
 use Calculation\Utils\Exchange\PaymentSystemInterface;
 use Calculation\Utils\Exchange\ServiceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use phpDocumentor\Reflection\Types\Collection;
 use Calculation\tests\Settings\Fee;
 
@@ -41,7 +42,7 @@ class PairUnit implements PairUnitInterface
      * @ORM\JoinColumn(nullable=false)
      * @Groups({"pair-unit:read", "calculator_collection_query", "pair:create", "invoice_item_query"})
      */
-    private PaymentSystemInterface $paymentSystem;
+    private PaymentSystemInterface $paymentSystem ;
 
     /**
      * @var ServiceInterface
@@ -93,6 +94,7 @@ class PairUnit implements PairUnitInterface
      * @ORM\ManyToOne(targetEntity=PairUnitTab::class, inversedBy="pairUnit")
      */
     private ?PairUnitTab $pairUnitTabs;
+    private $markupFee;
 
     /**
      * PairUnit constructor.
@@ -108,6 +110,7 @@ class PairUnit implements PairUnitInterface
                 "max" => 0
             ]
         ];
+        $this->paymentSystem = new PaymentSystem();
         $this->pairs = new ArrayCollection();
     }
 
@@ -138,25 +141,43 @@ class PairUnit implements PairUnitInterface
         return $this;
     }
 
-    /**
-     * @return PaymentSystemInterface
-     */
+/**
+* @return PaymentSystemInterface
+*/
     public function getPaymentSystem(): PaymentSystemInterface
     {
         return $this->paymentSystem;
     }
 
-    /**
-     * @param PaymentSystemInterface $paymentSystem
-     * @return $this
-     */
-    public function setPaymentSystem(PaymentSystemInterface $paymentSystem): self
+/**
+* @param ?PaymentSystem $paymentSystem
+* @return $this
+*/
+    public function setPaymentSystem(?PaymentSystem $paymentSystem): self
     {
         $this->paymentSystem = $paymentSystem;
 
         return $this;
     }
 
+    /**
+     * @return PaymentSystemInterface
+     */
+    public function getPayoutSystem(): PaymentSystemInterface
+    {
+        return $this->payoutSystem;
+    }
+
+    /**
+     * @param PaymentSystemInterface $payoutSystem
+     * @return $this
+     */
+    public function setPayoutSystem(PaymentSystemInterface $payoutSystem): self
+    {
+        $this->payoutSystem = $payoutSystem;
+
+        return $this;
+    }
     /**
      * @return ServiceInterface
      */
@@ -176,23 +197,40 @@ class PairUnit implements PairUnitInterface
         return $this;
     }
 
-    /**
-     * @param FeeInterface $Markupfee
-     * @return $this
-     */
-    public function setMarkupfee(FeeInterface $Markupfee): self
+/**
+* @return FeeInterface|null
+*/
+    public function getPrimeFee(): FeeInterface
     {
-        $this->Markupfee= $Markupfee;
+        return $this->primeFee;
+    }
+
+/**
+* @param FeeInterface $primeFee
+* @return $this
+*/
+    public function setPrimeFee(FeeInterface  $primeFee): self
+    {
+        $this->primeFee = $primeFee;
 
         return $this;
     }
-    /**
-     * @param FeeInterface $Primefee
-     * @return $this
-     */
-    public function setPrimefee(FeeInterface $Primefee): self
+
+/**
+* @return FeeInterface|null
+*/
+    public function getMarkupFee(): FeeInterface
     {
-        $this->Primefee = $Primefee;
+        return $this->markupFee;
+    }
+
+/**
+* @param FeeInterface $markupFee
+* @return $this
+*/
+    public function setMarkupFee(FeeInterface $markupFee): self
+    {
+        $this->markupFee = $markupFee;
 
         return $this;
     }
@@ -369,13 +407,47 @@ class PairUnit implements PairUnitInterface
         return $this;
     }
 
-    public function getPrimeFee(): FeeInterface
+/**
+* @return float|null
+*/
+    public function getPaymentRate(): ?float
     {
-        // TODO: Implement getPrimeFee() method.
+        return $this->paymentRate;
     }
 
-    public function getMarkupFee(): FeeInterface
+/**
+* @param float $paymentRate
+* @return $this
+*/
+    public function setPaymentRate(float $paymentRate): self
     {
-        // TODO: Implement getMarkupFee() method.
+        $this->paymentRate = $paymentRate;
+
+        return $this;
+    }
+
+/**
+* @return float|null
+*/
+    public function getPayoutRate(): ?float
+    {
+        return $this->payoutRate;
+    }
+
+/**
+* @param float $payoutRate
+* @return $this
+*/
+    public function setPayoutRate(float $payoutRate): self
+    {
+        $this->payoutRate = $payoutRate;
+
+        return $this;
+    }
+    public function setPrice(float $price): self
+    {
+        $this->price = $price;
+
+        return $this;
     }
 }

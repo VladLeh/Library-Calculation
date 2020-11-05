@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit bootstrap="vendor/autoload.php">
+    <php>
+        <env name="DATABASE_URL" value="mysql://coin24-user:root@172.22.0.8/coin24" />
+        <env name="APP_ENV" value="test" />
+        <server name="KERNEL_CLASS" value="App\Kernel" />
+
+
+<!--        <env name="DATABASE_URL" value="" />-->
+</php>
+    <testsuite name="User">
+        <directory suffix="Testpayments.php">./tests</directory>
+    </testsuite>
+</phpunit>

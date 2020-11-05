@@ -61,6 +61,8 @@ class Pair implements PairInterface
      * @Groups({"pair:write", "pair:read", "pair_mutation", "pair_collection_query", "collection_query", "item_query", "requisition_collection_query"})
      */
     private float $outPercent;
+    private $percent;
+    private $payment;
 
     /**
      * Pair constructor.
@@ -109,17 +111,17 @@ class Pair implements PairInterface
         return $this->isFlagSet(self::FLAG_PAYOUT);
     }
 
-    /**
-     * @param bool $status
-     * @return $this
-     * @Groups({"pair-direction:update"})
-     */
-    public function setPayout(bool $status): Pair
-    {
-        $this->setFlag(self::FLAG_PAYOUT, $status);
-
-        return $this;
-    }
+//    /**
+//     * @param bool $status
+//     * @return $this
+//     * @Groups({"pair-direction:update"})
+//     */
+//    public function setPayout(bool $status): Pair
+//    {
+//        $this->setFlag(self::FLAG_PAYOUT, $status);
+//
+//        return $this;
+//    }
 
     /**
      * @return PairUnitInterface
@@ -261,21 +263,45 @@ class Pair implements PairInterface
         return $this;
     }
 
-    public function setPrice(float $price): self
+
+
+    /**
+     * @return PairUnit
+     */
+    public function getPayment(): PairUnitInterface
     {
-        $this->price = $price;
+        return $this->payment;
+    }
+
+    /**
+     * @param PairUnit $payment
+     * @return $this
+     */
+    public function setPayment(PairUnit $payment): self
+    {
+        $this->payment = $payment;
+
+        return $this;
+    }
+
+    /**
+     * @return PairUnit
+     */
+    public function getPayout(): PairUnitInterface
+    {
+        return $this->payout;
+    }
+
+    /**
+     * @param PairUnit $payout
+     * @return $this
+     */
+    public function setPayout(PairUnit $payout): self
+    {
+        $this->payout = $payout;
 
         return $this;
     }
 
 
-    public function getPayment(): PairUnitInterface
-    {
-        // TODO: Implement getPayment() method.
-    }
-
-    public function getPayout(): PairUnitInterface
-    {
-        // TODO: Implement getPayout() method.
-    }
 }

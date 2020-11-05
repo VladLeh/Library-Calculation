@@ -67,4 +67,17 @@ class Fee implements FeeInterface
         return $this;
     }
 
+    public function setPrime(float $primeFee): self
+    {
+        $this->primeFee = $primeFee;
+
+        return $this;
+    }
+    public function setMarkup(float $markupFee): self
+    {
+        $this->markupFee = $markupFee;
+
+        return $this;
+    }
+
 }

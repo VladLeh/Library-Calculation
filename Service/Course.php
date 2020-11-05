@@ -25,6 +25,6 @@ class Course implements CourseInterface
         $outRate = $pair->getPayout()->getCurrency()->getPayoutRate() * ((100 - $pair->getPayout()->getPaymentSystem(
                     )->getPrice()) / 100);
 
-        return $inRate * $outRate * ((100 + $pair->getPercent()) / 100);
+        return $inRate / $outRate * ((100 - $pair->getPercent()) / 100);
     }
 }

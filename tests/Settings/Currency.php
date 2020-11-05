@@ -263,6 +263,41 @@ class Currency implements CurrencyInterface
 
         return $this;
     }
+/**
+* @return float|null
+*/
+    public function getPaymentRate(): float
+    {
+        return $this->paymentRate;
+    }
 
+/**
+* @param float $paymentRate
+* @return $this
+*/
+    public function setPaymentRate(float $paymentRate): self
+    {
+        $this->paymentRate = $paymentRate;
 
+        return $this;
+    }
+
+/**
+* @return float|null
+*/
+    public function getPayoutRate(): float
+    {
+        return $this->payoutRate;
+    }
+
+/**
+* @param float $payoutRate
+* @return $this
+*/
+    public function setPayoutRate(float $payoutRate): self
+    {
+        $this->payoutRate = $payoutRate;
+
+        return $this;
+    }
 }
